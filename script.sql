@@ -50,13 +50,13 @@ CREATE TABLE reservations (
   restaurant_id bigint UNSIGNED NOT NULL, -- id del restaurante
   table_id bigint UNSIGNED NULL,  -- id de la mesa (puede ser NULL si no se asigna)
   customer_name varchar(255) NOT NULL,  -- nombre del cliente
-  customer_email varchar(255) NOT NULL, -- correo del cliente
+  customer_email varchar(255)  NULL, -- correo del cliente
   customer_phone varchar(255) NOT NULL,  -- telefono del cliente
   party_size int NOT NULL,  -- número de personas
   date date NOT NULL, --    fecha de la reserva
   start_time time NOT NULL, -- hora de inicio de la reserva
-  end_time time NOT NULL, -- hora de fin de la reserva
-  duration int NOT NULL,  -- duración en minutos
+  end_time time  NULL, -- hora de fin de la reserva
+  duration int  NULL,  -- duración en minutos
   status varchar(255) NOT NULL DEFAULT 'pending', -- 'pending', 'confirmed', 'cancelled', 'completed' -- estado de la reserva
   notes text NULL, -- notas adicionales
   reservation_type varchar(255) NOT NULL DEFAULT 'regular', -- 'regular', 'birthday', 'wedding', 'graduation', 'corporate', 'other' -- tipo de reserva

@@ -9,9 +9,21 @@ class Reservation extends Model
 {
     use HasFactory;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($reservation) {
+            if (empty($reservation->codigo)) {
+                $reservation->codigo = 'RES-' . strtoupper(uniqid());
+            }
+        });
+    }
+
     protected $fillable = [
         'restaurant_id',
         'table_id',
+        'codigo',
         'customer_name',
         'customer_email',
         'customer_phone',

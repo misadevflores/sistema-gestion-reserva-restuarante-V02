@@ -1,12 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\ReservationController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ReservationController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
-// Reservation API Routes
 Route::apiResource('reservations', ReservationController::class);
+Route::post('reservations/check-availability', [ReservationController::class, 'checkAvailability']);

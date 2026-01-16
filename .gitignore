@@ -21,3 +21,11 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/script.sql
+.DS_Store
+Thumbs.db
+/storage/debugbar
+/storage/framework/cache/data
+/storage/framework/sessions
+
+        

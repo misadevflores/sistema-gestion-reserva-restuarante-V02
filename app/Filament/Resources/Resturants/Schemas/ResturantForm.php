@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Resturants\Schemas;
 
 use Filament\Schemas\Schema;
 use Filament\Forms;
-use Filament\Forms\Components\Actions\Action;
+use Filament\Actions\Action;
 use App\Models\Restaurant;
 use Illuminate\Support\Str;
 class ResturantForm

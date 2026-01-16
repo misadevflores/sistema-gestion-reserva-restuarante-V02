@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Reservations;
 
-use App\Filament\Resources\Reservations\Pages\CalendarReservations;
 use App\Filament\Resources\Reservations\Pages\CreateReservation;
 use App\Filament\Resources\Reservations\Pages\EditReservation;
 use App\Filament\Resources\Reservations\Pages\ListReservations;
@@ -51,7 +50,6 @@ class ReservationResource extends Resource
             'index' => ListReservations::route('/'),
             'create' => CreateReservation::route('/create'),
             'edit' => EditReservation::route('/{record}/edit'),
-            'calendar' => CalendarReservations::route('/calendar'),
         ];
     }
 }

@@ -10,6 +10,7 @@
         "bezhansalleh/filament-shield": "^4.0",
         "filament/filament": "^4.0",
         "laravel/framework": "^11.31",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "wallacemartinss/filament-whatsapp-conector": "^1.0"
     },

@@ -15,14 +15,16 @@ return new class extends Migration
             $table->id();
             $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
             $table->foreignId('table_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('codigo')->unique();
             $table->string('customer_name');
-            $table->string('customer_email');
-            $table->string('customer_phone');
+            $table->string('customer_email')->nullable();
+            $table->string('customer_phone')->nullable();
             $table->integer('party_size');
             $table->date('date');
             $table->time('start_time');
-            $table->time('end_time');
-            $table->integer('duration');
+            $table->time('end_time')->nullable();
+            $table->integer('duration')->nullable();
+            $table->string('reservation_type');
             $table->string('status')->default('pending'); // pending, confirmed, cancelled, completed
             $table->text('notes')->nullable();
             $table->timestamps();

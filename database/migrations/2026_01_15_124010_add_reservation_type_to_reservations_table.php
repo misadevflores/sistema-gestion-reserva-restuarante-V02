@@ -9,14 +9,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->string('reservation_type')->default('regular')->after('status');
+            // $table->string('reservation_type')->default('regular')->after('status');
         });
     }
 
     public function down()
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->dropColumn('reservation_type');
+            // $table->dropColumn('reservation_type');
         });
     }
 };

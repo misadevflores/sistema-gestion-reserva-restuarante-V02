@@ -13,20 +13,26 @@ class ReservationForm
         return $schema
             ->components([
                 //
+                Forms\Components\TextInput::make('codigo')
+                ->readOnly() // o ->readOnly()
+                ->default(fn () => 'RES-' . strtoupper(uniqid())) // Generar un código único
+                ->dehydrated(false), // importante: no enviar al guardar
                 Forms\Components\Select::make('restaurant_id')
                 ->relationship('restaurant', 'name')
+                ->label('Restuarante')
                 ->required(),
             Forms\Components\Select::make('table_id')
                 ->relationship('table', 'name')
-                ->nullable(),
-            Forms\Components\TextInput::make('customer_name')->required(),
-            Forms\Components\TextInput::make('customer_email')->email()->required(),
-            Forms\Components\TextInput::make('customer_phone')->required(),
-            Forms\Components\TextInput::make('party_size')->numeric()->required(),
-            Forms\Components\DatePicker::make('date')->required(),
-            Forms\Components\TimePicker::make('start_time')->required(),
-            Forms\Components\TimePicker::make('end_time')->required(),
-            Forms\Components\TextInput::make('duration')->numeric()->required(),
+                ->nullable()
+                ->label('Mesa'),
+            Forms\Components\TextInput::make('customer_name')->required()->label('Nombre del Cliente'),
+            Forms\Components\TextInput::make('customer_email')->email()->label('Correo Electrónico (Opcional)'),
+            Forms\Components\TextInput::make('customer_phone')->required()->label('Teléfono del Cliente'),
+            Forms\Components\TextInput::make('party_size')->numeric()->required()->label('Cantidad de Personas'),
+            Forms\Components\DatePicker::make('date')->required()->label('Fecha de la Reserva'),
+            Forms\Components\TimePicker::make('start_time')->required()->label('Hora de Inicio'),
+            Forms\Components\TimePicker::make('end_time')->label('Hora de Fin (Opcional)'),
+            Forms\Components\TextInput::make('duration')->numeric()->label('Duración (Opcional)'),
             Forms\Components\Select::make('status')
                 ->options([
                     'pending' => 'Pendiente',
