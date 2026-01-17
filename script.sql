@@ -49,6 +49,7 @@ CREATE TABLE reservations (
   id bigint UNSIGNED NOT NULL AUTO_INCREMENT,  -- id de la reserva
   restaurant_id bigint UNSIGNED NOT NULL, -- id del restaurante
   table_id bigint UNSIGNED NULL,  -- id de la mesa (puede ser NULL si no se asigna)
+  codigo varchar(10) NOT NULL, -- codigo de la reserva
   customer_name varchar(255) NOT NULL,  -- nombre del cliente
   customer_email varchar(255)  NULL, -- correo del cliente
   customer_phone varchar(255) NOT NULL,  -- telefono del cliente
@@ -59,14 +60,50 @@ CREATE TABLE reservations (
   duration int  NULL,  -- duración en minutos
   status varchar(255) NOT NULL DEFAULT 'pending', -- 'pending', 'confirmed', 'cancelled', 'completed' -- estado de la reserva
   notes text NULL, -- notas adicionales
-  reservation_type varchar(255) NOT NULL DEFAULT 'regular', -- 'regular', 'birthday', 'wedding', 'graduation', 'corporate', 'other' -- tipo de reserva
+
+  reservation_type bigint UNSIGNED NOT NULL, --  -- id tipo de reserva
   created_at timestamp NULL DEFAULT NULL, -- fecha de creación
   updated_at timestamp NULL DEFAULT NULL, -- fecha de actualización
   PRIMARY KEY (id), -- clave primaria
+  FOREIGN KEY (reservation_type) REFERENCES restaurant_event() ON DELETE CASCADE UPDATE CASCADE
   FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE, -- clave foránea al restaurante 
   FOREIGN KEY (table_id) REFERENCES tables(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+-- --------------------------------------------------------
+-- Tabla: restaurant event
+-- --------------------------------------------------------
+CREATE TABLE type_event(
+  id_type bigint UNSIGNED NOT NULL AUTO_INCREMENT,  -- id del evento
+  name  varchar(100) NOT NULL,  --nombre del envento
+  description text null, --descripcion del evento
+  configure_spacial boolean DEFAULT false.
+  PRIMARY KEY(id_type) --
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- cuempleado 
+--otro
+--boda 
+
+CREATE TABLE  restaurant_event(
+    id bigint UNSIGNED NOT NULL AUTO_INCREMENT,  -- id del evento
+    id_type bigint UNSIGNED N NOT NULL,  -- id del tipo de evento 
+    restaurant_id bigint UNSIGNED NOT NULL, -- id del restaurante
+    status  boolean(1), -- estado del evento 
+    PRIMARY KEY (id), -- clave primaria
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE, -- clave foránea al restaurante 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+-- Tabla: restaurat_areas
+-- --------------------------------------------------------
+CREATE TABLE restaurant_areas(
+  id bigint UNSIGNED NOT NULL AUTO_INCREMENT,  -- id del area
+  name_area varchar(255) NOT NULL,
+    status  boolean(1),
+    PRIMARY KEY (id), -- clave primaria
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE, -- clave foránea al restaurante 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- --------------------------------------------------------
 -- Tabla: menus
 -- --------------------------------------------------------
@@ -146,6 +183,7 @@ CREATE TABLE menu_item_option_values (
   PRIMARY KEY (id), -- clave primaria
   FOREIGN KEY (option_id) REFERENCES menu_item_options(id) ON DELETE CASCADE -- clave foránea a la opción
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- --------------------------------------------------------
 -- Tabla: promotions (anuncios/promociones programadas)
